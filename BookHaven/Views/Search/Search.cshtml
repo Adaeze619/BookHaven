@@ -1,0 +1,46 @@
+﻿@model List<BookSearchRequest>
+
+<h2>SEARCH USERS</h2>
+
+@using (Html.BeginForm("Search", "User", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="searchTerm">Search </label>
+        <input type="text" name="searchTerm" placeholder="Enter any search item" class="form-control" />
+    </div>
+    <br />
+    <a asp-controller="Search" asp-action="Search" class="btn btn-primary">Search Book</a>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>BookTitle</th>
+                <th>Author</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <th>ISBN</th>
+                    <th>BookTitle</th>
+                    <th>Author</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found.</p>
+}

@@ -1,0 +1,71 @@
+﻿@model List<BookHaven.Domain.Model.Book>
+@{
+}
+
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>All Books - Admin Functionality</h1>
+    </div>
+</div>
+
+
+<div class="container py-5">
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>BookTitle</td>
+                    <td>Tags</td>
+                    <td> </td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bookPost in Model)
+                {
+                    <tr>
+                        <td>@bookPost.Id</td>
+                        <td>@bookPost.BookTitle</td>
+                        <td>
+                            <div class="d-flex">
+                                @foreach (var item in bookPost.Tags)
+                                {
+                                    <span class="badge bg-secondary me-1">
+                                        @item.Name
+
+                                    </span>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <a asp-area=""
+                               asp-controller="AdminBlogPost"
+                               asp-action="Edit"
+                               asp-route-id="@bookPost.Id">Edit</a>
+                            <a asp-area=""
+                               asp-controller="Books"
+                               asp-action="Delete"
+                               asp-route-id="@bookPost.Id">Delete</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p> No Blog Post Found</p>
+    }
+
+</div>
+
+@section Scripts {
+    <script>
+        var editor = new FroalaEditor("#content")
+    </script>
+}

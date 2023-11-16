@@ -1,0 +1,48 @@
+﻿@model List<BookHaven.Domain.Model.Book>
+
+@{
+}
+
+<div class="container">
+    <h1>Search Users</h1>
+
+    <form name="searchForm" asp-action="Search" asp-controller="Books" method="get">
+        <div class="form-group">
+            <label for="searchQuery">Search Term:</label>
+            <input type="text" class="form-control" name="searchQuery" id="searchQuery" placeholder="Enter search term" required />
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+    @if (Model != null && Model.Count > 0)
+    {
+        <h2>Search Results</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    @* <th>User ID</th> *@
+                    <th>Id</th>
+                    <th>ISBN</th>
+                    <th>BookTitle</th>
+                    <th>Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        @* <td>@user.Id</td> *@
+                        <td>@user.Id</td>
+                        <td>@user.ISBN</td>
+                        <td>@user.BookTitle</td>
+                        <td>@user.Author</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p class="alert alert-warning">@ViewBag.Message</p>
+    }
+</div>
